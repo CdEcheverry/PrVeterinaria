@@ -148,6 +148,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\RolPermisoController.cs" />
+    <Compile Include="Controllers\TipoParametrosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -536,6 +537,8 @@
     <Content Include="Views\RolPermiso\CreateRol.cshtml" />
     <Content Include="Views\RolPermiso\CreatePermiso.cshtml" />
     <Content Include="Views\RolPermiso\Detalle.cshtml" />
+    <Content Include="Views\TipoParametros\TipoDocumento.cshtml" />
+    <Content Include="Views\TipoParametros\TipoPago.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -115,6 +115,19 @@ namespace PrVeterinaria.Models.ViewModel
         public string nombreRol { get; set; }
     }
 
+    public class TipoDocumentoDTO
+    {
+        public int id_tipoDocumento { get; set; }
+        public string descripcion { get; set; }
+    }
+
+    public class TipoPagoDTO
+    {
+        public int id_tipoPago { get; set; }
+
+        public string nombre { get; set; }
+    }
+
     public class Permisoconsulta
     {
         public int id_permiso { get; set; }

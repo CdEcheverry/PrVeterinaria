@@ -18,7 +18,7 @@ namespace PrVeterinaria.Models
         [Key]
         public int id_tipoPago { get; set; }
 
-        [StringLength(10)]
+        [StringLength(100)]
         public string nombre { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
