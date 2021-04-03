@@ -114,4 +114,18 @@ namespace PrVeterinaria.Models.ViewModel
         public int id_rol { get; set; }
         public string nombreRol { get; set; }
     }
+
+    public class Permisoconsulta
+    {
+        public int id_permiso { get; set; }
+        public string nombrePermiso { get; set; }
+    }
+
+    public class RolPermiso
+    {
+        public int id_permiso { get; set; }
+        public int id_rol { get; set; }
+        public string nombreRol { get; set; }
+        public string nombrePermiso { get; set; }
+    }
 }

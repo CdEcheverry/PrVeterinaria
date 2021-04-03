@@ -533,7 +533,9 @@
     <Content Include="Views\Shared\_TopMenu.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Reporte\Index.cshtml" />
-    <Content Include="Views\RolPermiso\Create.cshtml" />
+    <Content Include="Views\RolPermiso\CreateRol.cshtml" />
+    <Content Include="Views\RolPermiso\CreatePermiso.cshtml" />
+    <Content Include="Views\RolPermiso\Detalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

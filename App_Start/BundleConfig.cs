@@ -22,9 +22,8 @@ namespace PrVeterinaria
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                         "~/Scripts/popper.js",
-                          "~/Scripts/popper.min.js",
                         "~/Scripts/bootstrap.js",
+                         "~/Scripts/bootstrap.min.js",
                         "~/Scripts/app.config.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/app.js"));

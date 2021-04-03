@@ -20,10 +20,6 @@ namespace PrVeterinaria.Models
 
         public int? id_mascota { get; set; }
 
-        public virtual DetalleMascota DetalleMascota1 { get; set; }
-
-        public virtual DetalleMascota DetalleMascota2 { get; set; }
-
         public virtual Mascota Mascota { get; set; }
     }
 }

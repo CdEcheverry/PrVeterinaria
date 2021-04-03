@@ -1,0 +1,127 @@
+﻿@model  PrVeterinaria.Models.ViewModel.Permisoconsulta
+@{
+    ViewBag.Title = "Rol";
+}
+@section Styles {
+    @Styles.Render("~/Content/DataTables/dataTables.bootstrap4.min.css")
+
+}
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-0">
+                <header>
+                    <div class="jarviswidget-ctrls" role="menu">
+                        <a href="@Url.Action("CreateRol","RolPermiso")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                            <div class="btn">
+                                <i class="fa fa-reply"></i> Volver
+                            </div>
+                        </a>
+                    </div>
+                    <h2>Rol </h2>
+                </header>
+                <div class="widget-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(Model => Model.nombrePermiso, new { htmlAttributes = new { @class = "form-control", id = "unidad", @readonly = "true" } })
+                                    @Html.ValidationMessageFor(model => model.nombrePermiso, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-5 form-group col-md-2">
+                            <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+<section>
+    <div id="content">
+        <div class="jarviswidget jarviswidget-color-white jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget" style="position: relative; opacity: 1; left: 0px; top: 0px;">
+            <header role="heading" class="ui-sortable-handle">
+                <h2>Lista de Permisos</h2>
+                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+            </header>
+            <div class="widget-body">
+                <div class="row galeria">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped" id="tlbItem">
+                            <thead>
+                                <tr>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> ID                        </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Nombre                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.Permiso != null)
+
+                                {
+                                    foreach (var item in (List<PrVeterinaria.Models.ViewModel.Permisoconsulta>)ViewBag.Permiso)
+                                    {
+                                        <tr>
+                                            <td align="center">@item.id_permiso                  </td>
+                                            <td align="center">@item.nombrePermiso               </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+
+{
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/dataTables.bootstrap4.min.js")
+    @Scripts.Render("~/Scripts/i18n/jquery.dataTables.es.js")
+
+    <script>
+
+        $("#btnGuardar").prop('disabled', true)
+
+        $("#nombre").change(function () {
+            if ($("#nombre").val().length > 0) {
+                $("#btnGuardar").prop('disabled', false)
+            }
+            else {
+                $("#btnGuardar").prop('disabled', true)
+            }
+
+        })
+
+        $(document).ready(function () {
+            $('#tlbItem').DataTable({
+
+                "oLanguage": {
+                    "oPaginate": {
+                        "sFirst": sFirst,
+                        "sLast": sLast,
+                        "sNext": sNext,
+                        "sPrevious": sPrevious,
+                    },
+
+                    "sEmptyTable": sEmptyTable,
+                    "sInfo": sInfo,
+                    "sInfoEmpty": sInfoEmpty,
+                    "sInfoFiltered": sInfoFiltered,
+                    "sZeroRecords": sZeroRecords,
+                    "sLengthMenu": sLengthMenu
+                },
+                "order": [0, "desc"],
+            });
+        });
+    </script>
+}

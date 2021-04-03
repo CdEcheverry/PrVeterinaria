@@ -24,11 +24,6 @@ namespace PrVeterinaria.Models
 
         [StringLength(25)]
         public string Titulo { get; set; }
-
-        public virtual detalleUsuario detalleUsuario1 { get; set; }
-
-        public virtual detalleUsuario detalleUsuario2 { get; set; }
-
         public virtual Usuarios Usuarios { get; set; }
     }
 }

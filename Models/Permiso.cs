@@ -12,7 +12,7 @@ namespace PrVeterinaria.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Permiso()
         {
-            rol = new HashSet<Rol>();
+            PermisoRol = new HashSet<PermisoRol>();
         }
 
         [Key]
@@ -21,6 +21,6 @@ namespace PrVeterinaria.Models
         [StringLength(20)]
         public string nombrePermiso { get; set; }
 
-        public virtual ICollection<Rol> rol { get; set; }
+        public virtual ICollection<PermisoRol> PermisoRol { get; set; }
     }
 }
