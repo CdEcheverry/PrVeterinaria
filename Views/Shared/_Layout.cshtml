@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Acme -  Universidad Del Valle</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/platillaSmartAdmin")
+    @Styles.Render("~/Content/Site.css")
+    @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+
+
+</head>
+<body class="smart-style-2">
+    @if (Request.IsAuthenticated)
+    {
+        <!-- Left side column. contains the logo and sidebar -->
+        @Html.Partial("_Header")
+        <!-- Left side column. contains the logo and sidebar -->
+        @Html.Partial("_TopMenu")
+    }
+ 
+    <div id="main" role="main">
+        <div id="content">
+            @RenderBody()
+        </div>
+    </div>
+
+    @Html.Partial("_Footer")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

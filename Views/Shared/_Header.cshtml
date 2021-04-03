@@ -1,0 +1,53 @@
+﻿
+
+<header id="header">
+    <!-- Logo -->
+
+    <div id="logo-group">
+        <span id="logo"> <img src="~/Content/images/logo.jpeg" alt="Logo"> </span>
+
+      
+    </div>
+
+    <div class="pull-right">
+
+        <div class="project-context hidden-xs">
+
+            <span class="label">Usuario:</span>
+            <span class="project-selector dropdown-toggle" data-toggle="dropdown">@User.Identity.Name.Split('@')[1] <i class="fa fa-angle-down"></i></span>
+
+           
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="@Url.Action("CambiarPassword", "Usuarios", new { area = "" })" class="padding-10 padding-top-5 padding-bottom-5"><i class="fa fa-key"></i> Cambiar Contraseña</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="@Url.Action("Logout", "Home", new { area = "" })" class="padding-10 padding-top-5 padding-bottom-5"><i class="fa fa-power-off"></i> <strong><u>S</u>alir</strong></a>
+                </li>
+            </ul>
+        </div>
+       
+
+        <div id="hide-menu" class="btn-header pull-right hidden-lg hidden-md">
+            <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+        </div>
+
+        <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+            <li class="">
+                <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
+                    <div class="btn btn-default">@*User.Identity.Name*@ <i class="fa fa-chevron-down"></i></div>
+                </a>
+                <ul class="dropdown-menu pull-right">                  
+                    <li>
+                        <a href="@Url.Action("CambiarPassword","Usuarios")" class="padding-10 padding-top-0 padding-bottom-0"> <i class="fa fa-key"></i> Cambiar Password</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="@Url.Action("LogOut","Home", new { area = "" })" class="padding-10 padding-top-5 padding-bottom-5"><i class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>

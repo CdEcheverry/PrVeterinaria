@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LogIn</title>
+    <meta content='width=device-width, initial-scale=2, maximum-scale=2, user-scalable=no' name='viewport'>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/SmartAdmin")
+
+    @RenderSection("styles", required: false)
+
+    @Scripts.Render("~/bundles/modernizr")
+    
+</head>
+<body class="login-page">
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

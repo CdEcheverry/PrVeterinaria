@@ -1,0 +1,67 @@
+﻿@model PrVeterinaria.Models.ViewModel.LogIn
+
+@{
+    ViewBag.Title = "LogIn";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="row text-center">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-7 col-md-offset-4 col-md-6 col-lg-offset-2 col-lg-5">
+        <img src="~/Content/images/logo.jpeg" class="text-center" />
+    </div>
+</div>
+
+<br />
+
+
+<div class="col-xs-12 col-sm-offset-7 col-sm-12 col-md-offset-1 col-md-7 col-lg-offset-3 col-lg-5">
+    <div class="well no-padding">
+        @using (Html.BeginForm(null, null, FormMethod.Post, htmlAttributes: new { @Class = "smart-form client-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("ReturnUrl");
+            <header>
+            </header>
+            <fieldset>
+                <section>
+                    @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "label" })
+                    <label class="input">
+                        <i class="icon-append fa fa-user"></i>
+                        @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                    </label>
+                </section>
+
+                <section>
+                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "label" })
+                    <label class="input">
+                        <i class="icon-append fa fa-lock"></i>
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                    </label>
+                    <div class="note">
+                        @Html.ActionLink("Recuperar Password", "RescatarPassword", "Home")
+                    </div>
+                </section>
+
+                <section>
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                </section>
+
+            </fieldset>
+            <footer>
+                <button type="submit" class="btn btn-primary">
+                    Acceder
+                </button>
+            </footer>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

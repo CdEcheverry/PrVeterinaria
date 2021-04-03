@@ -1,0 +1,29 @@
+﻿<aside id="left-panel">
+    <nav>
+        <ul>
+            <li>
+                <a href="@Url.Action("Index","Home",new { area = "" }, null)" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-cogs"></i> <span class="menu-item-parent">Configuracion</span></a>
+                <ul>
+                    <li>
+                        @Html.ActionLink("Crear Usuarios", "Index", "Usuarios", new { area = "" }, null)
+                    </li>
+                    <li>
+                        @Html.ActionLink("Crear Roles", "Create", "RolPermiso", new { area = "" }, null)
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-file-pdf-o"></i> <span class="menu-item-parent">Reportes</span></a>
+                <ul>
+                    <li>
+                        @Html.ActionLink("Ventas", "Index", "Reporte", new { area = "" }, null)
+                    </li>
+                </ul>
+            </li>
+         </ul>
+
+</nav>
+</aside>
