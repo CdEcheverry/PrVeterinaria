@@ -58,6 +58,42 @@ namespace PrVeterinaria.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Detalle(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+  
+            detalleUsuario details = new detalleUsuario();
+
+            details.id_usuario = id ?? 0;
+            var DetalleUsuario = _db.detalleUsuario.Select(p =>
+                       new DetalleUsuarioDTO
+                       {
+                           id_usuario = p.id_usuario,
+                           id_detalleUsuario = p.id_detalleUsuario,
+                           Titulo = p.Titulo,
+                           tipoEstudio = p.TipoEstudio.NombreTipo,
+                           FechaInicio = p.FechaInicio,
+                           FechaFin = p.FechaFin
+                       }).Where(x => x.id_usuario == id).ToList(); ;
+
+            ViewBag.TipoEstudio = new SelectList(_db.TipoEstudio, "id_tipoEstudio", "NombreTipo");
+
+            ViewBag.detalle = DetalleUsuario;
+            return View(details);
+        }
+
+        [HttpPost]
+        public ActionResult Detalle(detalleUsuario detalle)
+        {
+            _db.detalleUsuario.Add(detalle);
+            _db.SaveChanges();
+            return RedirectToAction("Detalle", new { id = detalle.id_usuario});
+        }
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,6 +106,7 @@ namespace PrVeterinaria.Controllers
             ViewBag.TipoDoc = new SelectList(_db.TipoDocumento, "id_tipoDocumento", "descripcion");
             return View(editUser);
         }
+
 
         [HttpPost]
         public ActionResult Edit(Usuarios edit)

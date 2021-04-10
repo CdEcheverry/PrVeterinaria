@@ -195,6 +195,28 @@ namespace PrVeterinaria.Models.ViewModel
         public string nombrePermiso { get; set; }
     }
 
+    public class DetalleUsuarioDTO
+    {
+        public int id_usuario { get; set; }
+        public int id_detalleUsuario { get; set; }
+
+
+        [Display(Name = "Grado de Escolaridad")]
+        public string tipoEstudio { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Fechai Inicio")]
+        public DateTime? FechaInicio { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Fecha Finalizaciòn")]
+        public DateTime? FechaFin { get; set; }
+
+        [StringLength(25)]
+        [Display(Name = "Titulo Obtenido")]
+        public string Titulo { get; set; }
+    }
+
     public class RolPermiso
     {
         public int id_permiso { get; set; }

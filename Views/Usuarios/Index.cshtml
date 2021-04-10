@@ -30,6 +30,7 @@
                                     <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Email                     </th>
                                     <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Rol                       </th>
                                     <th> </th>
+                                    <th> </th>
 
                                 </tr>
                             </thead>
@@ -39,14 +40,17 @@
                                 {
                                     foreach (var item in (List<PrVeterinaria.Models.ViewModel.listaUsuario>)ViewBag.ListaUsuario)
                                     {
-                                        <tr>
-                                            <td align="center">@item.idUsuario                    </td>
-                                            <td align="center">@item.email               </td>
-                                            <td align="center">@item.rolusuario               </td>
-                                            <td>
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.id })
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td align="center">@item.idUsuario                    </td>
+                                    <td align="center">@item.email               </td>
+                                    <td align="center">@item.rolusuario               </td>
+                                    <td>
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.id })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Detalle", "Detalle", new { id = item.id })
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>
