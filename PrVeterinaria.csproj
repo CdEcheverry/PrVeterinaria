@@ -544,6 +544,8 @@
     <Content Include="Views\TipoParametros\TipoProducto.cshtml" />
     <Content Include="Views\TipoParametros\TipoEstudio.cshtml" />
     <Content Include="Views\Producto\CrearProducto.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

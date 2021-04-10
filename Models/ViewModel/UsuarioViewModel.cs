@@ -8,7 +8,7 @@ namespace PrVeterinaria.Models.ViewModel
 {
     public class Nuevo
     {      
-        [Display(Name = "Id Usuarios")]
+        [Display(Name = "UserProfile")]
         [MaxLength(50)]
         public string idUsuario { get; set; }
 
@@ -36,6 +36,13 @@ namespace PrVeterinaria.Models.ViewModel
 
         [Display(Name = "Rol Asignado")]
         public int id_rol { get; set; }
+
+        [Display(Name = "Tipo Documento")]
+        public int tipoDoc { get; set; }
+
+        [Display(Name = "Numero Documento")]
+        public string numeroDocumento { get; set; }
+        
     }
     public class listaUsuario
     {

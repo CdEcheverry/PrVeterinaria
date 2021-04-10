@@ -24,20 +24,23 @@ namespace PrVeterinaria.Models
         [StringLength(20)]
         public string contraseña { get; set; }
 
-        public int? id_tipoDocumento { get; set; }
+        public int id_tipoDocumento { get; set; }
 
         [StringLength(10)]
         public string numeroDocumentro { get; set; }
 
         [StringLength(20)]
+        [Display(Name = "Email")]
         public string correo { get; set; }
 
         [StringLength(20)]
+        [Display(Name = "Direccion")]
         public string direccion { get; set; }
 
+        [Display(Name = "Rol Asignado")]
         public int id_rol { get; set; }
 
-        public int? telefono { get; set; }
+        public string telefono { get; set; }
 
         public string UserProfile { get; set; }
 

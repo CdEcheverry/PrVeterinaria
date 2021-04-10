@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Rol";
+    ViewBag.Title = "Usuarios";
 }
 @section Styles {
 
@@ -12,13 +12,13 @@
         <div class="jarviswidget jarviswidget-color-white jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget" style="position: relative; opacity: 1; left: 0px; top: 0px;">
             <header>
                 <div class="jarviswidget-ctrls" role="menu">
-                    <a href="@Url.Action("CreateRol","RolPermiso")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                    <a href="@Url.Action("Create","Usuarios")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
                         <div class="btn">
-                            <i class="fa fa-reply"></i> Volver
+                            <i class="fa fa-plus"></i> Nuevo
                         </div>
                     </a>
                 </div>
-                <h2>Rol </h2>
+                <h2> Lista de Usuarios </h2>
             </header>
             <div class="widget-body">
                 <div class="row galeria">
@@ -44,7 +44,7 @@
                                             <td align="center">@item.email               </td>
                                             <td align="center">@item.rolusuario               </td>
                                             <td>
-                                                @Html.ActionLink("Editar", "Usuarios", new { id = item.id })
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.id })
                                             </td>
                                         </tr>
                                     }

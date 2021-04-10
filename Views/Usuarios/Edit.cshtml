@@ -1,0 +1,91 @@
+﻿@model PrVeterinaria.Models.Usuarios
+
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+        <h2>Administracion de Usuarios</h2>
+    </div>
+</div>
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-0">
+                <header>
+                    <div class="jarviswidget-ctrls" role="menu">
+                        <a href="@Url.Action("Index","Usuarios")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Cancelar">
+                            <div class="btn">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <h2>Editar un Usuario</h2>
+                </header>
+                <div>
+                    <div class="jarviswidget-editbox">
+
+                        <input class="form-control" type="text">
+                    </div>
+                    <div class="widget-body">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control text-uppercase", @readonly = "true" } })
+                                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.direccion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                                    @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.telefono, null, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                                    @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                                    @Html.ValidationMessageFor(model => model.correo, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.id_rol, null, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.id_rol, (IEnumerable<SelectListItem>)ViewBag.Rol, "-- Seleccione --", htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.id_rol, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">                             
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.id_usuario, new { htmlAttributes = new { @class = "form-control text-uppercase", @hidden = "true" } })
+                                    @Html.ValidationMessageFor(model => model.id_usuario, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-offset-5 form-group col-md-2">
+                                <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
+                            </div>
+                        </div>
+                         }
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
