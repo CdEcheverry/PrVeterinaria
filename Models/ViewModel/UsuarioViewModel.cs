@@ -34,12 +34,12 @@ namespace PrVeterinaria.Models.ViewModel
         [Display(Name = "Email")]
         public string email { get; set; }
 
-        [Display(Name = "Permiso Asignado")]
-        public string idRol { get; set; }
+        [Display(Name = "Rol Asignado")]
+        public int id_rol { get; set; }
     }
     public class listaUsuario
     {
-        
+        public int id { get; set; }
         public string idUsuario { get; set; }
 
         [Display(Name = "Email")]        
@@ -51,7 +51,6 @@ namespace PrVeterinaria.Models.ViewModel
         [Display(Name = "Rol Asignado")]
         public string rolusuario { get; set; }
        
-        public bool activo { get; set; }
     }
 
     public class EditarUsuario

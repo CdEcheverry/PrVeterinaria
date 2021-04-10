@@ -38,7 +38,7 @@ namespace PrVeterinaria.Controllers
         [HttpPost]
         public ActionResult LogIn(string usuario, string password, string ReturnUrl)
         {
-            Usuarios tblUsuario = _db.Usuarios.Where(s => s.nombre == usuario).FirstOrDefault();
+            Usuarios tblUsuario = _db.Usuarios.Where(s => s.UserProfile == usuario).FirstOrDefault();
             if (tblUsuario != null)
             {
                 if (tblUsuario.contraseña.Trim().Equals(password))

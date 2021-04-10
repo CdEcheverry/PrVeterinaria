@@ -18,18 +18,18 @@ namespace PrVeterinaria.Models
         [Key]
         public int id_mascota { get; set; }
 
-        [StringLength(20)]
+        [StringLength(100)]
         public string nombreMascota { get; set; }
 
-        [StringLength(20)]
+        [StringLength(100)]
         public string raza { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? fecha_nacimiento_mascota { get; set; }
 
-        public int? id_tipoMascota { get; set; }
+        public int id_tipoMascota { get; set; }
 
-        public int? id_Cliente { get; set; }
+        public int id_Cliente { get; set; }
 
         public virtual Clientes Clientes { get; set; }
 

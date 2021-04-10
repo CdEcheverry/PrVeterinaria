@@ -1,5 +1,6 @@
 ﻿using PrVeterinaria.Libs;
 using PrVeterinaria.Models;
+using PrVeterinaria.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,16 @@ namespace PrVeterinaria.Controllers
         [Authentication("USUARIOS")]
         public ActionResult Index()
         {
+            var usuarios  = _db.Usuarios.Select(user =>
+                        new listaUsuario
+                        {
+                            idUsuario = user.UserProfile,
+                            rolusuario = user.Rol.nombreRol,
+                            email=user.correo,
+                            id=user.id_usuario
+                        }).ToList();
+
+            ViewBag.ListaUsuario = usuarios;
             return View();
         }
 

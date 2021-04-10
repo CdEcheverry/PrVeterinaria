@@ -39,6 +39,8 @@ namespace PrVeterinaria.Models
 
         public int? telefono { get; set; }
 
+        public string UserProfile { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<detalleUsuario> detalleUsuario { get; set; }
 
