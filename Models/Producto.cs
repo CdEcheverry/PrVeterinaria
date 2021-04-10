@@ -18,12 +18,12 @@ namespace PrVeterinaria.Models
         [Key]
         public int id_producto { get; set; }
 
-        [StringLength(20)]
+        [StringLength(500)]
         public string nombre { get; set; }
 
-        public int? id_tipoProducto { get; set; }
+        public int id_tipoProducto { get; set; }
 
-        public decimal? precio { get; set; }
+        public decimal precio { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleFactura> DetalleFactura { get; set; }

@@ -92,6 +92,5 @@ namespace PrVeterinaria.Controllers
             }
             return RedirectToAction("LogIn", "Home", new { area = "" });
         }
-
     }
 }

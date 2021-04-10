@@ -12,7 +12,7 @@ namespace PrVeterinaria.Models
         [Key]
         public int id_tipoEstudio { get; set; }
 
-        [StringLength(10)]
+        [StringLength(100)]
         public string NombreTipo { get; set; }
     }
 }

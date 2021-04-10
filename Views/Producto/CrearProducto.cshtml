@@ -1,25 +1,20 @@
-﻿@model  PrVeterinaria.Models.ViewModel.Permisoconsulta
+﻿@model  PrVeterinaria.Models.ViewModel.ProductoDTO
+
 @{
-    ViewBag.Title = "Rol";
+    ViewBag.Title = "Permisos de Rol";
 }
 @section Styles {
+
     @Styles.Render("~/Content/DataTables/dataTables.bootstrap4.min.css")
 
-}
 
+}
 <section id="widget-grid" class="">
     <div class="row">
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="jarviswidget" id="wid-id-0">
                 <header>
-                    <div class="jarviswidget-ctrls" role="menu">
-                        <a href="@Url.Action("CreateRol","RolPermiso")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
-                            <div class="btn">
-                                <i class="fa fa-reply"></i> Volver
-                            </div>
-                        </a>
-                    </div>
-                    <h2>Permisos </h2>
+                    <h2>Producto </h2>
                 </header>
                 <div class="widget-body">
                     @using (Html.BeginForm())
@@ -29,8 +24,18 @@
                             <div class="form-group">
                                 @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-3">
-                                    @Html.EditorFor(Model => Model.nombrePermiso, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.nombrePermiso, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control text-uppercase"} })
+                                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.Label("Precio", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control"} })
+                                    @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.Label("TipoProducto", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(model => model.id_tipoProducto, (IEnumerable<SelectListItem>)ViewBag.Producto, "-- Seleccione --", htmlAttributes: new { @class = "form-control", id = "idItem" })
+                                    @Html.ValidationMessageFor(model => model.id_tipoProducto, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -38,72 +43,97 @@
                             <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
                         </div>
                     }
+
                 </div>
             </div>
         </article>
     </div>
 </section>
+
 <section>
     <div id="content">
         <div class="jarviswidget jarviswidget-color-white jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget" style="position: relative; opacity: 1; left: 0px; top: 0px;">
+
             <header role="heading" class="ui-sortable-handle">
-                <h2>Lista de Permisos</h2>
-                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                <h2>Lista de Roles</h2>
+                <div class="jarviswidget-ctrls" role="menu">
+                </div>
             </header>
             <div class="widget-body">
                 <div class="row galeria">
                     <div class="col-md-12">
-                        <table class="table table-bordered table-striped" id="tlbItem">
+                        <table id="example" class="table table-striped table-bordered dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
                             <thead>
                                 <tr>
                                     <th> <p style="text-align:center;font-family:Arial;font-size:90%"> ID                        </th>
                                     <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Nombre                    </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Precio                    </th>
+
+
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (ViewBag.Permiso != null)
+                                @if (ViewBag.consulta != null)
 
                                 {
-                                    foreach (var item in (List<PrVeterinaria.Models.ViewModel.Permisoconsulta>)ViewBag.Permiso)
+                                    foreach (var item in (List<PrVeterinaria.Models.ViewModel.ProductoDTO>)ViewBag.consulta)
                                     {
-                                        <tr>
-                                            <td align="center">@item.id_permiso                  </td>
-                                            <td align="center">@item.nombrePermiso               </td>
-                                        </tr>
+                                <tr>
+                                    <td align="center">@item.id  </td>
+                                    <td align="center">@item.nombre </td>
+                                    <td align="center">@item.precio </td>
+                                </tr>
                                     }
                                 }
                             </tbody>
                         </table>
                     </div>
+                    <br>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-@section Scripts
 
+
+
+@section Scripts
 {
     @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
     @Scripts.Render("~/Scripts/dataTables.bootstrap4.min.js")
     @Scripts.Render("~/Scripts/i18n/jquery.dataTables.es.js")
 
+
     <script>
 
-        $("#btnGuardar").prop('disabled', true)
+           $("#btnGuardarInfo").prop('disabled', true)
 
-        $("#nombre").change(function () {
-            if ($("#nombre").val().length > 0) {
-                $("#btnGuardar").prop('disabled', false)
+        $("#idpermisoRol").change(function ()
+        {
+            if ($("#idpermisoRol").val().length)
+            {
+                $("#btnGuardarInfo").prop('disabled', false)
             }
-            else {
-                $("#btnGuardar").prop('disabled', true)
+            else
+            {
+                $("#btnGuardarInfo").prop('disabled', true)
             }
 
         })
 
-        $(document).ready(function () {
-            $('#tlbItem').DataTable({
+        function Modal() {
+            $("#modalCrear").show()
+        }
+
+         function muestraMensaje()
+         {
+             var url= '@Url.Action("Detalle", "RolPermiso")';
+             window.location.href = url;
+         }
+
+           $(document).ready(function () {
+               $('#example').DataTable({
 
                 "oLanguage": {
                     "oPaginate": {

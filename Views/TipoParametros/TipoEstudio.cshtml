@@ -1,4 +1,4 @@
-﻿@model  PrVeterinaria.Models.ViewModel.Permisoconsulta
+﻿@model  PrVeterinaria.Models.ViewModel.TipoEstudioDTO
 @{
     ViewBag.Title = "Rol";
 }
@@ -13,13 +13,8 @@
             <div class="jarviswidget" id="wid-id-0">
                 <header>
                     <div class="jarviswidget-ctrls" role="menu">
-                        <a href="@Url.Action("CreateRol","RolPermiso")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
-                            <div class="btn">
-                                <i class="fa fa-reply"></i> Volver
-                            </div>
-                        </a>
                     </div>
-                    <h2>Permisos </h2>
+                    <h2>Tipo Estudio </h2>
                 </header>
                 <div class="widget-body">
                     @using (Html.BeginForm())
@@ -29,8 +24,8 @@
                             <div class="form-group">
                                 @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-3">
-                                    @Html.EditorFor(Model => Model.nombrePermiso, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.nombrePermiso, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(Model => Model.NombreTipo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NombreTipo, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -47,7 +42,7 @@
     <div id="content">
         <div class="jarviswidget jarviswidget-color-white jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget" style="position: relative; opacity: 1; left: 0px; top: 0px;">
             <header role="heading" class="ui-sortable-handle">
-                <h2>Lista de Permisos</h2>
+                <h2>Lista Tipo Estudio</h2>
                 <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
             </header>
             <div class="widget-body">
@@ -61,14 +56,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (ViewBag.Permiso != null)
+                                @if (ViewBag.TipoEstu != null)
 
                                 {
-                                    foreach (var item in (List<PrVeterinaria.Models.ViewModel.Permisoconsulta>)ViewBag.Permiso)
+                                    foreach (var item in (List<PrVeterinaria.Models.ViewModel.TipoEstudioDTO>)ViewBag.TipoEstu)
                                     {
                                         <tr>
-                                            <td align="center">@item.id_permiso                  </td>
-                                            <td align="center">@item.nombrePermiso               </td>
+                                            <td align="center">@item.id_tipoEstudio                  </td>
+                                            <td align="center">@item.NombreTipo               </td>
                                         </tr>
                                     }
                                 }
