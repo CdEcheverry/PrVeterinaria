@@ -1,7 +1,7 @@
 ﻿@model PrVeterinaria.Models.ViewModel.Nuevo
 
 @{
-    ViewBag.Title = "Usuarios";
+    ViewBag.Title = "Clientes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,13 +17,13 @@
             <div class="jarviswidget" id="wid-id-0">
                 <header>
                     <div class="jarviswidget-ctrls" role="menu">
-                        <a href="@Url.Action("Index","Usuarios")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                        <a href="@Url.Action("Index","Clientes")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
                             <div class="btn">
                                 <i class="fa fa-reply"></i> Volver
                             </div>
                         </a>
                     </div>
-                    <h2>Registrar un Usuario</h2>
+                    <h2>Registrar un Cliente</h2>
                 </header>
                 <div>
                     <div class="jarviswidget-editbox">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="widget-body">
                         @using (Html.BeginForm())
-                         {
+                        {
                             @Html.AntiForgeryToken()
 
                             <div class="form-horizontal">
@@ -45,26 +45,11 @@
                                         @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.idUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.ciudad, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-4">
-                                        @Html.EditorFor(model => model.idUsuario, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
-                                        @Html.ValidationMessageFor(model => model.idUsuario, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-4">
-                                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.direccion, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-4">
-                                        @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
-                                        @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.ciudad, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                                        @Html.ValidationMessageFor(model => model.ciudad, "", new { @class = "text-danger" })
                                     </div>
 
                                     @Html.LabelFor(model => model.telefono, null, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -79,12 +64,6 @@
                                     <div class="col-md-4">
                                         @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
                                         @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    @Html.LabelFor(model => model.id_rol, null, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-4">
-                                        @Html.DropDownListFor(model => model.id_rol, (IEnumerable<SelectListItem>)ViewBag.Rol, "-- Seleccione --", htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.id_rol, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -103,7 +82,7 @@
                                     <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
                                 </div>
                             </div>
-                         }
+                        }
                     </div>
                 </div>
             </div>

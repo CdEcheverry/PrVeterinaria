@@ -34,6 +34,9 @@ namespace PrVeterinaria.Models.ViewModel
         [Display(Name = "Email")]
         public string email { get; set; }
 
+        [Display(Name = "Ciudad")]
+        public string ciudad { get; set; }
+
         [Display(Name = "Rol Asignado")]
         public int id_rol { get; set; }
 
@@ -76,6 +79,26 @@ namespace PrVeterinaria.Models.ViewModel
         public string idRol { get; set; }
     }
 
+    public class listaClientes
+    {
+        public int id_Cliente { get; set; }
+
+        public string tipoDocumento { get; set; }
+
+        public string numeroDocumento { get; set; }
+
+        public string telefono { get; set; }
+
+        public string ciudad { get; set; }
+
+        [Display(Name = "Email")]
+        public string email { get; set; }
+
+        [Display(Name = "Nombre")]
+        public string nombre { get; set; }
+
+
+    }
     public class LogIn
     {
         [Display(Name = "Usuario")]

@@ -18,24 +18,24 @@ namespace PrVeterinaria.Models
         [Key]
         public int id_Cliente { get; set; }
 
-        [StringLength(25)]
+        [StringLength(50)]
         public string nombreCliente { get; set; }
 
-        public int? id_tipoDocumento { get; set; }
+        public int id_tipoDocumento { get; set; }
 
-        [StringLength(10)]
+        [StringLength(50)]
         public string numeroDocumento { get; set; }
 
-        [StringLength(10)]
+        [StringLength(50)]
         public string correo { get; set; }
 
-        [StringLength(10)]
+        [StringLength(50)]
         public string direccion { get; set; }
 
-        [StringLength(10)]
+        [StringLength(50)]
         public string ciudad { get; set; }
 
-        public int? telefono { get; set; }
+        public string telefono { get; set; }
 
         public virtual TipoDocumento TipoDocumento { get; set; }
 
