@@ -166,6 +166,27 @@ namespace PrVeterinaria.Models.ViewModel
 
         public int id_mascota { get; set; }
     }
+
+    public class VentaViewModel
+    {
+        public int id_factura { get; set; }
+
+        public int id_producto { get; set; }
+
+        [Display(Name = "Cantidad")]
+        public int cantidad { get; set; }
+
+        [Display(Name = "Precio")]
+        public decimal precio { get; set; }
+        public string producto { get; set; }
+
+        [Display(Name = "Numero De Documento")]
+        [Required]
+        public string id_Cliente { get; set; }
+
+        [Display(Name = "Pago")]
+        public string id_tipoPago { get; set; }
+    }
     public class Rolconsulta
     {
         public int id_rol { get; set; }

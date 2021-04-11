@@ -12,13 +12,13 @@ namespace PrVeterinaria.Models
         [Key]
         public int id_detalleFactura { get; set; }
 
-        public int? id_factura { get; set; }
+        public int id_factura { get; set; }
 
-        public int? id_producto { get; set; }
+        public int id_producto { get; set; }
 
-        public decimal? precio { get; set; }
+        public decimal precio { get; set; }
 
-        public int? cantidad { get; set; }
+        public int cantidad { get; set; }
 
         public virtual Factura Factura { get; set; }
 

@@ -558,6 +558,8 @@
     <Content Include="Views\Clientes\IndexMascota.cshtml" />
     <Content Include="Views\Clientes\CreateMascota.cshtml" />
     <Content Include="Views\Clientes\HistorialMascota.cshtml" />
+    <Content Include="Views\Reporte\Create.cshtml" />
+    <Content Include="Views\Reporte\DetalleVenta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

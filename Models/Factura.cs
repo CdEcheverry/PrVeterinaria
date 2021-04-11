@@ -19,11 +19,13 @@ namespace PrVeterinaria.Models
         public int id_factura { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? fecha { get; set; }
+        public DateTime fecha { get; set; }
 
-        public int? id_Cliente { get; set; }
+        [Display(Name = "Cliente")]
+        public int id_Cliente { get; set; }
 
-        public int? id_tipoPago { get; set; }
+        [Display(Name = "Forma de Pago")]
+        public int id_tipoPago { get; set; }
 
         public virtual Clientes Clientes { get; set; }
 

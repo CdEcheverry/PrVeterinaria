@@ -1,0 +1,226 @@
+﻿@model  PrVeterinaria.Models.ViewModel.VentaViewModel
+
+@{
+    ViewBag.Title = "DetalleProducto";
+}
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-0">
+                <header>
+                    <div class="jarviswidget-ctrls" role="menu">
+                        <a href="@Url.Action("Create","Venta")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Cancelar">
+                            <div class="btn">
+                                <i class="fa-long-arrow-left"></i>Volver
+                            </div>
+                        </a>
+                    </div>
+                </header>
+                <div class="widget-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <div class="form-group text-align-left">
+                                @Html.Label("Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.id_Cliente, new { htmlAttributes = new { @class = "form-control text-uppercase", @id = "idItem", @readonly = "true" } })
+                                    @Html.ValidationMessageFor(model => model.id_Cliente, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.Label("Restaurante", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(Model => Model.id_tipoPago, new { htmlAttributes = new { @class = "form-control", id = "cantidadIngreso", @readonly = "true" } })
+                                    @Html.ValidationMessageFor(Model => Model.id_tipoPago, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<div class="row">
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="jarviswidget" id="wid-id-0">
+            <header>
+                <div class="jarviswidget-ctrls" role="menu">
+                    <a href="#" data-toggle="modal" data-target="#modalDetalles" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                        <div class="btn">
+                            <i class="fa fa-plus"></i> Nuevo
+                        </div>
+                    </a>
+                </div>
+                <div class="jarviswidget-ctrls" role="menu">
+                    <a href="@Url.Action("Reporte", "Venta", new { id = Model.id_factura })" target="_blank" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Cancelar">
+                        <div class="btn">
+                            <i class="fa fa-print"></i>Imprimir
+                        </div>
+                    </a>
+                </div>
+            </header>
+            <div>
+                <div class="form-horizontal">
+                    <div class="col-md-12">
+                        <div class="tab-content">
+                            <div class="widget-body">
+                                <div class="row galeria">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered table-striped" id="tlbDetalle">
+                                            <thead>
+                                                <tr>
+                                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> ID                        </th>
+                                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Nombre                        </th>
+                                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Cantidad               </th>
+                                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Precio               </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (ViewBag.listaMascotas != null)
+                                                {
+                                                    foreach (var item in (List<PrVeterinaria.Models.ViewModel.VentaViewModel>)ViewBag.listaMascotas)
+                                                    {
+                                                        <tr>
+                                                            <td align="center">@item.id_producto    </td>
+                                                            <td align="center">@item.producto     </td>
+                                                            <td align="center">@item.cantidad            </td>
+                                                            <td align="center">@item.precio            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane active" id="Adicional" role="tabpanel">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+
+
+<div class="modal fade" id="modalDetalles">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @using (Ajax.BeginForm("DetalleVenta", "Reporte",
+       new AjaxOptions
+       {
+           HttpMethod = "POST",
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "Div-Kit"
+       }))
+            {
+            <div class="modal-header bg-color-blueDark txt-color-white">
+                <h4 class="modal-title">Agregar Producto</h4>
+                <button type="button" class="close txt-color-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.Label("Producto", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-5 text-align-left">
+                            @Html.DropDownListFor(model => model.id_producto, (IEnumerable<SelectListItem>)ViewBag.Producto, "-- Seleccione --", htmlAttributes: new { @class = "form-control", id = "idTipoItem" })
+                            @Html.ValidationMessageFor(model => model.id_producto, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group text-align-left">
+                            @Html.Label("Cantidad", htmlAttributes: new { @class = "col-md-2" })
+                            <div class="col-md-5 text-align-left">
+                                @Html.EditorFor(model => model.cantidad, new { htmlAttributes = new { @class = "form-control text-uppercase", id = "descripcion", } })
+                                @Html.ValidationMessageFor(model => model.cantidad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-5 text-align-left">
+                            @Html.EditorFor(model => model.id_factura, new { htmlAttributes = new { @class = "form-control text-uppercase", @id = "idItem", @type = "hidden" } })
+                            @Html.ValidationMessageFor(model => model.id_factura, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-pull-6 form-group col-md-2 text-align-center">
+                    <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/dataTables.bootstrap4.min.js")
+    @Scripts.Render("~/Scripts/i18n/jquery.dataTables.es.js")
+
+
+    <script>
+
+           $("#btnGuardarInfo").prop('disabled', true)
+
+        $("#idTipoItem").change(function ()
+        {
+            if ($("#idTipoItem").val().length > 0 && $("#descripcion").val().length > 0)
+            {
+                $("#btnGuardarInfo").prop('disabled', false)
+            }
+            else
+            {
+                $("#btnGuardarInfo").prop('disabled', true)
+            }
+
+        })
+
+         $("#descripcion").change(function ()
+         {
+            if ($("#idTipoItem").val().length > 0 && $("#descripcion").val().length > 0)
+            {
+                $("#btnGuardarInfo").prop('disabled', false)
+            }
+            else
+            {
+                $("#btnGuardarInfo").prop('disabled', true)
+            }
+
+         })
+
+         function muestraMensaje()
+         {
+             var url= '@Url.Action("Create", "Items")';
+             window.location.href = url;
+         }
+
+           $(document).ready(function () {
+            $('#tlbDetalle').DataTable({
+
+                "oLanguage": {
+                    "oPaginate": {
+                        "sFirst": sFirst,
+                        "sLast": sLast,
+                        "sNext": sNext,
+                        "sPrevious": sPrevious,
+                    },
+
+                    "sEmptyTable": sEmptyTable,
+                    "sInfo": sInfo,
+                    "sInfoEmpty": sInfoEmpty,
+                    "sInfoFiltered": sInfoFiltered,
+                    "sZeroRecords": sZeroRecords,
+                    "sLengthMenu": sLengthMenu
+                },
+                "order": [0, "desc"],
+            });
+        });
+    </script>
+}
