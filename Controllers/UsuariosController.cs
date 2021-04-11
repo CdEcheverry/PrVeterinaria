@@ -65,7 +65,6 @@ namespace PrVeterinaria.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-  
             detalleUsuario details = new detalleUsuario();
 
             details.id_usuario = id ?? 0;

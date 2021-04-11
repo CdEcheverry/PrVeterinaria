@@ -1,0 +1,157 @@
+﻿@model  PrVeterinaria.Models.DetalleMascota
+
+@{
+    ViewBag.Title = "Permisos de Rol";
+}
+@section Styles {
+
+    @Styles.Render("~/Content/DataTables/dataTables.bootstrap4.min.css")
+
+}
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-0">
+                <header>
+                    <div class="jarviswidget-ctrls" role="menu">
+                        <a href="@Url.Action("IndexMascota","Clientes")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                            <div class="btn">
+                                <i class="fa fa-reply"></i> Volver
+                            </div>
+                        </a>
+                    </div>
+                    <h2>Consulta  </h2>
+                </header>
+                <div class="widget-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                @Html.Label("Fecha Consulta", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                                    @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.EditorFor(Model => Model.id_mascota, new { htmlAttributes = new { @class = "form-control", hidden = "true" } })
+                                    @Html.ValidationMessageFor(model => model.id_mascota, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @Html.Label("Diagnostico", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-lg-10">
+                                @Html.TextAreaFor(model => model.nombreDetalle,5,150, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                                @Html.ValidationMessageFor(model => model.nombreDetalle, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="col-md-offset-5 form-group col-md-2">
+                            <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<section>
+    <div id="content">
+        <div class="jarviswidget jarviswidget-color-white jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget" style="position: relative; opacity: 1; left: 0px; top: 0px;">
+
+            <header role="heading" class="ui-sortable-handle">
+                <h2>Diagnosticos</h2>
+                <div class="jarviswidget-ctrls" role="menu">
+                </div>
+            </header>
+            <div class="widget-body">
+                <div class="row galeria">
+                    <div class="col-md-12">
+                        <table id="example" class="table table-striped table-bordered dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
+                            <thead>
+                                <tr>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> ID                        </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Fecha Consulta                    </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Diagnostico                     </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.historial != null)
+                                {
+                                    foreach (var item in (List<PrVeterinaria.Models.ViewModel.DetalleMascotaDTO>)ViewBag.historial)
+                                    {
+                                        <tr>
+                                            <td align="center">@item.id_detalleMascota   </td>
+                                            <td align="center">@item.fecha.ToShortDateString()   </td>
+                                            <td align="center">@item.nombreDetalle   </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/dataTables.bootstrap4.min.js")
+    @Scripts.Render("~/Scripts/i18n/jquery.dataTables.es.js")
+
+    <script>
+
+           $("#btnGuardarInfo").prop('disabled', true)
+
+        $("#idpermisoRol").change(function ()
+        {
+            if ($("#idpermisoRol").val().length)
+            {
+                $("#btnGuardarInfo").prop('disabled', false)
+            }
+            else
+            {
+                $("#btnGuardarInfo").prop('disabled', true)
+            }
+
+        })
+
+        function Modal() {
+            $("#modalCrear").show()
+        }
+
+         function muestraMensaje()
+         {
+             var url= '@Url.Action("Detalle", "RolPermiso")';
+             window.location.href = url;
+         }
+
+           $(document).ready(function () {
+               $('#example').DataTable({
+
+                "oLanguage": {
+                    "oPaginate": {
+                        "sFirst": sFirst,
+                        "sLast": sLast,
+                        "sNext": sNext,
+                        "sPrevious": sPrevious,
+                    },
+
+                    "sEmptyTable": sEmptyTable,
+                    "sInfo": sInfo,
+                    "sInfoEmpty": sInfoEmpty,
+                    "sInfoFiltered": sInfoFiltered,
+                    "sZeroRecords": sZeroRecords,
+                    "sLengthMenu": sLengthMenu
+                },
+                "order": [0, "desc"],
+            });
+        });
+    </script>
+}

@@ -12,13 +12,14 @@ namespace PrVeterinaria.Models
         [Key]
         public int id_detalleMascota { get; set; }
 
-        [StringLength(30)]
+        [StringLength(500)]
         public string nombreDetalle { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? fecha { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime fecha { get; set; }
 
-        public int? id_mascota { get; set; }
+        public int id_mascota { get; set; }
 
         public virtual Mascota Mascota { get; set; }
     }

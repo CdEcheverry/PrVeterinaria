@@ -19,17 +19,24 @@ namespace PrVeterinaria.Models
         public int id_mascota { get; set; }
 
         [StringLength(100)]
+        [Display(Name = "Nombre")]
         public string nombreMascota { get; set; }
 
         [StringLength(100)]
         public string raza { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? fecha_nacimiento_mascota { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Fecha Nacimiento")]
+        public DateTime fecha_nacimiento_mascota { get; set; }
 
+        [Display(Name = "Especie")]
         public int id_tipoMascota { get; set; }
 
+        [Display(Name = "Dueño")]
         public int id_Cliente { get; set; }
+
+        public int edad { get; set; }
 
         public virtual Clientes Clientes { get; set; }
 

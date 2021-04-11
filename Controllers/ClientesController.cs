@@ -15,6 +15,7 @@ namespace PrVeterinaria.Controllers
     {
         DBContexto _db = new DBContexto();
         // GET: Usuarios
+        #region Clientes
         [Authentication("CLIENTES")]
         public ActionResult Index()
         {
@@ -33,7 +34,6 @@ namespace PrVeterinaria.Controllers
             ViewBag.listaClientes = clientes;
             return View();
         }
-
         public ActionResult Create()
         {
             ViewBag.TipoDoc = new SelectList(_db.TipoDocumento, "id_tipoDocumento", "descripcion");
@@ -56,7 +56,6 @@ namespace PrVeterinaria.Controllers
 
             return RedirectToAction("Index");
         }
-
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,7 +80,72 @@ namespace PrVeterinaria.Controllers
             _db.SaveChanges();
             return RedirectToAction("Edit", new { id = edit.id_Cliente });
         }
+        #endregion
 
+        #region Mascotas
+
+        public ActionResult IndexMascota()
+        {
+           var Mascotas = _db.Mascota.Select(m =>
+           new MascotaDTO
+           {
+               id_mascota=m.id_mascota,
+               dueño = m.Clientes.nombreCliente,
+               nombreMascota = m.nombreMascota,
+               fecha_nacimiento_mascota = m.fecha_nacimiento_mascota,
+               edad = m.edad,
+               raza = m.raza,
+               especie = m.TipoMascota.nombre
+           }).ToList();
+
+            ViewBag.listaMascotas = Mascotas;
+            return View();
+        }
+
+        public ActionResult CreateMascota()
+        {
+            ViewBag.especie = new SelectList(_db.TipoMascota, "id_tipoMascota", "nombre");
+            ViewBag.cliente = new SelectList(_db.Clientes, "id_Cliente", "nombreCliente");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateMascota(Mascota mascota)
+        {
+            _db.Mascota.Add(mascota);
+            _db.SaveChanges();
+
+            return RedirectToAction("IndexMascota");
+        }
+
+        public ActionResult HistorialMascota(int? id)
+        {
+
+            DetalleMascota historialClinica = new DetalleMascota();
+
+            historialClinica.id_mascota = id ?? 0;
+            var Historial = _db.DetalleMascota.Where(x => x.id_mascota == historialClinica.id_mascota).Select(p =>
+                       new DetalleMascotaDTO
+                       {
+                           id_detalleMascota = p.id_detalleMascota,
+                           nombreDetalle = p.nombreDetalle,
+                           fecha = p.fecha                        
+                       });
+
+            ViewBag.historial = Historial.ToList();
+            return View(historialClinica);
+        }
+
+        [HttpPost]
+        public ActionResult HistorialMascota(DetalleMascota detalle)
+        {
+            _db.DetalleMascota.Add(detalle);
+            _db.SaveChanges();
+
+            return RedirectToAction("HistorialMascota", new { id = detalle.id_mascota});
+
+        }
+        #endregion
         protected override void Dispose(bool disposing)
         {
             if (disposing)

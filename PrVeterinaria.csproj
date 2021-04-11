@@ -384,6 +384,8 @@
     <Content Include="Scripts\bootstrap-datetimepicker.es.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Chart.js" />
@@ -482,6 +484,8 @@
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
     <Content Include="Scripts\i18n\jquery.dataTables.es.js" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <None Include="Scripts\jquery-3.4.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.0.js" />
     <Content Include="Scripts\jquery-3.4.0.min.js" />
@@ -551,6 +555,9 @@
     <Content Include="Views\Clientes\Create.cshtml" />
     <Content Include="Views\Clientes\Edit.cshtml" />
     <Content Include="Views\Usuarios\Detalle.cshtml" />
+    <Content Include="Views\Clientes\IndexMascota.cshtml" />
+    <Content Include="Views\Clientes\CreateMascota.cshtml" />
+    <Content Include="Views\Clientes\HistorialMascota.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

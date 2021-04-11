@@ -42,13 +42,19 @@
                     <li>
                         @Html.ActionLink("Crear Clientes", "Index", "Clientes", new { area = "" }, null)
                     </li>
+                    <li>
+                        @Html.ActionLink("Crear Mascotas", "IndexMascota", "Clientes", new { area = "" }, null)
+                    </li>
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="fa fa-lg fa-fw fa-file-pdf-o"></i> <span class="menu-item-parent">Reportes</span></a>
+                <a href="#"><i class="fa fa-lg fa-fw fa-shopping-cart"></i> <span class="menu-item-parent">Tienda</span></a>
                 <ul>
                     <li>
                         @Html.ActionLink("Ventas", "Index", "Reporte", new { area = "" }, null)
+                    </li>
+                    <li>
+                        @Html.ActionLink("Reporte", "Reporte", "Reporte", new { area = "" }, null)
                     </li>
                 </ul>
             </li>

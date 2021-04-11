@@ -96,7 +96,22 @@ namespace PrVeterinaria.Models.ViewModel
 
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
+    }
 
+    public class MascotaDTO
+    {
+        public int id_mascota { get; set; }
+
+        public string nombreMascota { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Fecha Nacimiento")]
+        public DateTime fecha_nacimiento_mascota { get; set; }
+        public string dueño { get; set; }
+
+        public int edad { get; set;}
+        public string raza { get; set; }
+        public string especie { get; set; }
 
     }
     public class LogIn
@@ -138,6 +153,19 @@ namespace PrVeterinaria.Models.ViewModel
         public string confirmPassword { get; set; }
     }
 
+    public class DetalleMascotaDTO
+    {
+        [Display(Name = "id")]
+        public int id_detalleMascota { get; set; }
+
+        [Display(Name = "Diagnostico")]
+        public string nombreDetalle { get; set; }
+
+        [Display(Name = "Fecha de Consulta")]
+        public DateTime fecha { get; set; }
+
+        public int id_mascota { get; set; }
+    }
     public class Rolconsulta
     {
         public int id_rol { get; set; }

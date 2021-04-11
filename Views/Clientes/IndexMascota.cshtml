@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Mascotas";
+}
+@section Styles {
+
+    @Styles.Render("~/Content/DataTables/dataTables.bootstrap4.min.css")
+
+
+}
+<section>
+    <div id="content">
+        <div class="jarviswidget jarviswidget-color-white jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget" style="position: relative; opacity: 1; left: 0px; top: 0px;">
+            <header>
+                <div class="jarviswidget-ctrls" role="menu">
+                    <a href="@Url.Action("CreateMascota","Clientes")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                        <div class="btn">
+                            <i class="fa fa-plus"></i> Nuevo
+                        </div>
+                    </a>
+                </div>
+                <h2> Lista de Mascotas </h2>
+            </header>
+            <div class="widget-body">
+                <div class="row galeria">
+                    <div class="col-md-12">
+                        <table id="example" class="table table-striped table-bordered dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
+                            <thead>
+                                <tr>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> id                      </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Nombre                      </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Fecha Nacimiento                      </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Edad                      </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Especie                     </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Raza                       </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Dueño                       </th>
+                                    <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Historia Clinica                       </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.listaMascotas != null)
+
+                                {
+                                    foreach (var item in (List<PrVeterinaria.Models.ViewModel.MascotaDTO>)ViewBag.listaMascotas)
+                                    {
+                                        <tr>
+                                            <td align="center">@item.id_mascota                    </td>
+                                            <td align="center">@item.nombreMascota               </td>
+                                            <td align="center">@item.fecha_nacimiento_mascota.ToShortDateString() </td>
+                                            <td align="center">@item.edad               </td>
+                                            <td align="center">@item.especie               </td>
+                                            <td align="center">@item.raza               </td>
+                                            <td align="center">@item.dueño               </td>
+                                            <td>
+                                                @Html.ActionLink("Ver", "HistorialMascota", new { id = item.id_mascota})
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/dataTables.bootstrap4.min.js")
+    @Scripts.Render("~/Scripts/i18n/jquery.dataTables.es.js")
+
+
+
+    <script>
+
+        $("#btnGuardar").prop('disabled', true)
+        $("#nombre").change(function () {
+            if ($("#nombre").val().length > 0) {
+                $("#btnGuardar").prop('disabled', false)
+            }
+            else {
+                $("#btnGuardar").prop('disabled', true)
+            }
+
+        })
+        $(document).ready(function () {
+            $('#example').DataTable({
+
+                "oLanguage": {
+                    "oPaginate": {
+                        "sFirst": sFirst,
+                        "sLast": sLast,
+                        "sNext": sNext,
+                        "sPrevious": sPrevious,
+                    },
+
+                    "sEmptyTable": sEmptyTable,
+                    "sInfo": sInfo,
+                    "sInfoEmpty": sInfoEmpty,
+                    "sInfoFiltered": sInfoFiltered,
+                    "sZeroRecords": sZeroRecords,
+                    "sLengthMenu": sLengthMenu
+                },
+                "order": [0, "desc"],
+            });
+        });
+    </script>
+}
