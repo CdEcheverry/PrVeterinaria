@@ -9,54 +9,18 @@
 
 
 }
-<section id="widget-grid" class="">
-    <div class="row">
-        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="jarviswidget" id="wid-id-0">
-                <header>
-                    <h2>Producto </h2>
-                </header>
-                <div class="widget-body">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control text-uppercase"} })
-                                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
-                                </div>
-                                @Html.Label("Precio", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control"} })
-                                    @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-danger" })
-                                </div>
-                                @Html.Label("TipoProducto", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-3">
-                                    @Html.DropDownListFor(model => model.id_tipoProducto, (IEnumerable<SelectListItem>)ViewBag.Producto, "-- Seleccione --", htmlAttributes: new { @class = "form-control", id = "idItem" })
-                                    @Html.ValidationMessageFor(model => model.id_tipoProducto, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-offset-5 form-group col-md-2">
-                            <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
-                        </div>
-                    }
-
-                </div>
-            </div>
-        </article>
-    </div>
-</section>
-
 <section>
     <div id="content">
         <div class="jarviswidget jarviswidget-color-white jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget" style="position: relative; opacity: 1; left: 0px; top: 0px;">
 
             <header role="heading" class="ui-sortable-handle">
-                <h2>Lista de Roles</h2>
+                <h2>Lista de Productos</h2>
                 <div class="jarviswidget-ctrls" role="menu">
+                    <a href="#" data-toggle="modal" data-target="#modalDetalles" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                        <div class="btn">
+                            <i class="fa fa-plus"></i> Nuevo
+                        </div>
+                    </a>
                 </div>
             </header>
             <div class="widget-body">
@@ -68,8 +32,6 @@
                                     <th> <p style="text-align:center;font-family:Arial;font-size:90%"> ID                        </th>
                                     <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Nombre                    </th>
                                     <th> <p style="text-align:center;font-family:Arial;font-size:90%"> Precio                    </th>
-
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,11 +40,11 @@
                                 {
                                     foreach (var item in (List<PrVeterinaria.Models.ViewModel.ProductoDTO>)ViewBag.consulta)
                                     {
-                                <tr>
-                                    <td align="center">@item.id  </td>
-                                    <td align="center">@item.nombre </td>
-                                    <td align="center">@item.precio </td>
-                                </tr>
+                                        <tr>
+                                            <td align="center">@item.id  </td>
+                                            <td align="center">@item.nombre </td>
+                                            <td align="center">@item.precio </td>
+                                        </tr>
                                     }
                                 }
                             </tbody>
@@ -95,6 +57,53 @@
     </div>
 </section>
 
+<div class="modal fade" id="modalDetalles">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @using (Ajax.BeginForm("CrearProducto", "Producto",
+       new AjaxOptions
+       {
+           HttpMethod = "POST",
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "Div-Kit"
+       }))
+            {
+                <div class="modal-header bg-color-blueDark txt-color-white">
+                    <h4 class="modal-title">Ingresar Producto</h4>
+                    <button type="button" class="close txt-color-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-5 text-align-left">
+                            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group text-align-left">
+                            @Html.Label("Precio", htmlAttributes: new { @class = "col-md-2" })
+                            <div class="col-md-5 text-align-left">
+                                @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @Html.Label("TipoProducto", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-5 text-align-left">
+                            @Html.DropDownListFor(model => model.id_tipoProducto, (IEnumerable<SelectListItem>)ViewBag.Producto, "-- Seleccione --", htmlAttributes: new { @class = "form-control", id = "idItem" })
+                            @Html.ValidationMessageFor(model => model.id_tipoProducto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-pull-6 form-group col-md-2 text-align-center">
+                    <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 
 

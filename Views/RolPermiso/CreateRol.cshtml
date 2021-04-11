@@ -3,42 +3,12 @@
     ViewBag.Title = "Rol";
 }
 @section Styles {
-  
-        @Styles.Render("~/Content/DataTables/dataTables.bootstrap4.min.css")
+
+    @Styles.Render("~/Content/DataTables/dataTables.bootstrap4.min.css")
 
 
 }
 
-<section id="widget-grid" class="">
-    <div class="row">
-        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="jarviswidget" id="wid-id-0">
-                <header>
-                    <h2>Rol </h2>
-                </header>
-                <div class="widget-body">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(Model => Model.nombreRol, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.nombreRol, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-offset-5 form-group col-md-2">
-                            <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
-                        </div>
-                    }
-
-                </div>
-            </div>
-        </article>
-    </div>
-</section>
 
 <section>
     <div id="content">
@@ -46,7 +16,13 @@
 
             <header role="heading" class="ui-sortable-handle">
                 <h2>Lista de Roles</h2>
-                <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                <div class="jarviswidget-ctrls" role="menu">
+                    <a href="#" data-toggle="modal" data-target="#modalDetalles" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                        <div class="btn">
+                            <i class="fa fa-plus"></i> Nuevo
+                        </div>
+                    </a>
+                </div>
             </header>
             <div class="widget-body">
                 <div class="row galeria">
@@ -86,6 +62,42 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="modalDetalles">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @using (Ajax.BeginForm("CreateRol", "RolPermiso",
+       new AjaxOptions
+       {
+           HttpMethod = "POST",
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "Div-Kit"
+       }))
+            {
+                <div class="modal-header bg-color-blueDark txt-color-white">
+                    <h4 class="modal-title">Agregar Rol</h4>
+                    <button type="button" class="close txt-color-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-5 text-align-left">
+                            @Html.EditorFor(model => model.nombreRol, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                            @Html.ValidationMessageFor(model => model.nombreRol, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-pull-6 form-group col-md-2 text-align-center">
+                    <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 @section Scripts
 {

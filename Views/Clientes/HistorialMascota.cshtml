@@ -8,54 +8,6 @@
     @Styles.Render("~/Content/DataTables/dataTables.bootstrap4.min.css")
 
 }
-<section id="widget-grid" class="">
-    <div class="row">
-        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="jarviswidget" id="wid-id-0">
-                <header>
-                    <div class="jarviswidget-ctrls" role="menu">
-                        <a href="@Url.Action("IndexMascota","Clientes")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
-                            <div class="btn">
-                                <i class="fa fa-reply"></i> Volver
-                            </div>
-                        </a>
-                    </div>
-                    <h2>Consulta  </h2>
-                </header>
-                <div class="widget-body">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                @Html.Label("Fecha Consulta", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-3">
-                                    @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
-                                    @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="col-md-3">
-                                    @Html.EditorFor(Model => Model.id_mascota, new { htmlAttributes = new { @class = "form-control", hidden = "true" } })
-                                    @Html.ValidationMessageFor(model => model.id_mascota, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            @Html.Label("Diagnostico", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-lg-10">
-                                @Html.TextAreaFor(model => model.nombreDetalle,5,150, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
-                                @Html.ValidationMessageFor(model => model.nombreDetalle, "", new { @class = "text-danger" })
-                            </div>
-
-                        </div>
-                        <div class="col-md-offset-5 form-group col-md-2">
-                            <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
-                        </div>
-                    }
-
-                </div>
-            </div>
-        </article>
-    </div>
-</section>
-
 <section>
     <div id="content">
         <div class="jarviswidget jarviswidget-color-white jarviswidget-sortable" id="wid-id-0" data-widget-editbutton="false" role="widget" style="position: relative; opacity: 1; left: 0px; top: 0px;">
@@ -63,6 +15,16 @@
             <header role="heading" class="ui-sortable-handle">
                 <h2>Diagnosticos</h2>
                 <div class="jarviswidget-ctrls" role="menu">
+                    <a href="#" data-toggle="modal" data-target="#modalDetalles" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                        <div class="btn">
+                            <i class="fa fa-plus"></i> Nuevo
+                        </div>
+                    </a>
+                    <a href="@Url.Action("IndexMascota","Clientes")" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Nuevo">
+                        <div class="btn">
+                            <i class="fa fa-reply"></i> Volver
+                        </div>
+                    </a>
                 </div>
             </header>
             <div class="widget-body">
@@ -97,6 +59,47 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="modalDetalles">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @using (Ajax.BeginForm("HistorialMascota", "Clientes",
+       new AjaxOptions
+       {
+           HttpMethod = "POST",
+           InsertionMode = InsertionMode.Replace,
+           UpdateTargetId = "Div-Kit"
+       }))
+            {
+                <div class="modal-header bg-color-blueDark txt-color-white">
+                    <h4 class="modal-title">Ingresar Diagnostico</h4>
+                    <button type="button" class="close txt-color-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.Label("Fecha Consulta", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-5 text-align-left">
+                            @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                            @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.Label("Diagnostico", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-lg-8">
+                            @Html.TextAreaFor(model => model.nombreDetalle, 5, 100, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                            @Html.ValidationMessageFor(model => model.nombreDetalle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-pull-6 form-group col-md-2 text-align-center">
+                    <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 
 @section Scripts
