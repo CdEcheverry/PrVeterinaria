@@ -187,6 +187,26 @@ namespace PrVeterinaria.Models.ViewModel
         [Display(Name = "Pago")]
         public string id_tipoPago { get; set; }
     }
+
+    public class VentaReporte
+    {
+        public int id_factura { get; set; }
+        public decimal precio { get; set; }
+        public string articulo { get; set; }
+        public DateTime fecha { get; set; }
+        public string tipoPago { get; set; }
+        public int cantidad { get; set; }            
+        public string nombreCliente { get; set; }          
+        public string Direccion { get; set; }
+        public string ciudad { get; set; }
+        public string TipoDocumento { get; set; }
+        public string numeroDocumento { get; set; }
+        public decimal Total { get; set; }
+
+        public decimal TotalFactura { get; set; }
+
+    }
+
     public class Rolconsulta
     {
         public int id_rol { get; set; }
