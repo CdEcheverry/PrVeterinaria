@@ -80,25 +80,25 @@
                     <div class="form-horizontal">
                         @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-5 text-align-left">
-                            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control text-uppercase", @id = "nombre" } })
                             @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group text-align-left">
                             @Html.Label("Precio", htmlAttributes: new { @class = "col-md-2" })
                             <div class="col-md-5 text-align-left">
-                                @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.precio, new { htmlAttributes = new { @class = "form-control", @id = "precio" } })
                                 @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         @Html.Label("TipoProducto", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-5 text-align-left">
-                            @Html.DropDownListFor(model => model.id_tipoProducto, (IEnumerable<SelectListItem>)ViewBag.Producto, "-- Seleccione --", htmlAttributes: new { @class = "form-control", id = "idItem" })
+                            @Html.DropDownListFor(model => model.id_tipoProducto, (IEnumerable<SelectListItem>)ViewBag.Producto, "-- Seleccione --", htmlAttributes: new { @class = "form-control", id = "idpermisoRol" })
                             @Html.ValidationMessageFor(model => model.id_tipoProducto, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
                 <div class="col-md-pull-6 form-group col-md-2 text-align-center">
-                    <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
+                    <input type="submit" id="btnGuardarInfo" value="Guardar" class="btn btn-primary" />
                 </div>
             }
         </div>
@@ -120,12 +120,32 @@
 
         $("#idpermisoRol").change(function ()
         {
-            if ($("#idpermisoRol").val().length)
+            if ($("#nombre").val().length > 0 && $("#precio").val().length > 0)
             {
                 $("#btnGuardarInfo").prop('disabled', false)
             }
             else
             {
+                $("#btnGuardarInfo").prop('disabled', true)
+            }
+
+        })
+
+        $("#nombre").change(function () {
+            if ($("#idpermisoRol").val().length > 0 && $("#precio").val().length > 0) {
+                $("#btnGuardarInfo").prop('disabled', false)
+            }
+            else {
+                $("#btnGuardarInfo").prop('disabled', true)
+            }
+
+        })
+
+        $("#precio").change(function () {
+            if ($("#nombre").val().length > 0 && $("#idpermisoRol").val().length > 0) {
+                $("#btnGuardarInfo").prop('disabled', false)
+            }
+            else {
                 $("#btnGuardarInfo").prop('disabled', true)
             }
 

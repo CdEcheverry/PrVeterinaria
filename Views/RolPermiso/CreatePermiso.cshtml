@@ -74,13 +74,13 @@
                     <div class="form-horizontal">
                         @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-5 text-align-left">
-                            @Html.EditorFor(model => model.nombrePermiso, new { htmlAttributes = new { @class = "form-control text-uppercase" } })
+                            @Html.EditorFor(model => model.nombrePermiso, new { htmlAttributes = new { @class = "form-control text-uppercase", @id="nombre" } })
                             @Html.ValidationMessageFor(model => model.nombrePermiso, "", new { @class = "text-danger" })
                         </div>                     
                     </div>
                 </div>
                 <div class="col-md-pull-6 form-group col-md-2 text-align-center">
-                    <input type="submit" id="btnGuardarItem" value="Guardar" class="btn btn-primary" />
+                    <input type="submit" id="btnGuardar" value="Guardar" class="btn btn-primary" />
                 </div>
             }
         </div>
