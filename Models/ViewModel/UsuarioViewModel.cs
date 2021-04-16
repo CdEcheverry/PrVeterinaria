@@ -79,6 +79,14 @@ namespace PrVeterinaria.Models.ViewModel
         public string idRol { get; set; }
     }
 
+    public class ViewReporteFecha
+    {
+        [DataType(DataType.Date)]
+        public DateTime fechaInicial { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime fechaFinal { get; set; }
+    }
+
     public class listaClientes
     {
         public int id_Cliente { get; set; }
