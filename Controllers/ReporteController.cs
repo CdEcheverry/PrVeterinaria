@@ -173,6 +173,78 @@ namespace PrVeterinaria.Controllers
 
             return File(renderedBytes, mimeType);
         }
+         
+        public ActionResult ReporteVentas()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ReporteVentas([Bind(Include = "fechaInicial,fechaFinal")] ViewReporteFecha datos)
+        {
+            if (ModelState.IsValid)
+            {
+                LocalReport localReport = new LocalReport();
+                string path = Server.MapPath("~/Reportes/Facturas/ReporteFecha.rdlc");
+                if (!System.IO.File.Exists(path))
+                {
+                    return RedirectToAction("");
+                }
+                localReport.ReportPath = path;
+
+                var consulta = (from b in _db.Factura
+                                join p in _db.DetalleFactura on b.id_factura equals p.id_factura
+                                join a in _db.Producto on p.id_producto equals a.id_producto
+                                where b.fecha >= datos.fechaInicial && b.fecha <= datos.fechaFinal
+                                select new VentaReporte
+                                {
+                                    id_factura = b.id_factura,
+                                    precio = p.precio,
+                                    nombreCliente = a.id_tipoProducto.ToString(),
+                                    articulo = a.nombre,
+                                    fecha = b.fecha,
+                                    tipoPago = b.TipoPago.nombre,
+                                    cantidad = p.cantidad,
+                                    Total = p.precio * p.cantidad
+                                }).ToList();
+
+                localReport.DataSources.Add(new ReportDataSource("ReporteFecha", consulta));
+
+                string reportType = "EXCELOPENXML";
+                string mimeType;
+                string encoding;
+                string fileNameExtension;
+
+                string deviceInfo =
+                    "<DeviceInfo>" +
+                    "  <OutputFormat>" + reportType + "</OutputFormat>" +
+                     "  <PageWidth>11in</PageWidth>" +
+                     "  <PageHeight>8.5in</PageHeight>" +
+                     "  <MarginTop>0.5in</MarginTop>" +
+                     "  <MarginLeft>1in</MarginLeft>" +
+                     "  <MarginRight>1in</MarginRight>" +
+                     "  <MarginBottom>0.5in</MarginBottom>" +
+                    "</DeviceInfo>";
+
+                Warning[] warnings;
+                string[] streams;
+                byte[] renderedBytes;
+
+                renderedBytes = localReport.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+                return File(renderedBytes, mimeType);
+
+            }
+               return View();
+        }
 
         protected override void Dispose(bool disposing)
         {

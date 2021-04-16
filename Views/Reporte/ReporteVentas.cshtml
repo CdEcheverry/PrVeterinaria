@@ -1,0 +1,99 @@
+﻿@model PrVeterinaria.Models.ViewModel.ViewReporteFecha
+
+@{
+    ViewBag.Title = "ReporteFecha";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
+<input type="hidden" id="mensaje" value="@ViewBag.mensaje" />
+<input type="hidden" id="descarga" value="@ViewBag.descarga" />
+<section id="widget-grid" class="">
+    <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-0">
+                <header>
+                    <div class="jarviswidget-ctrls" role="menu">
+                        <a href="" class="button-icon jarviswidget-edit-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Recargar">
+                            <div class="btn">
+                                <i class="fa fa-recycle"></i> Recargar
+                            </div>
+                        </a>
+                    </div>
+                    <h2>Generacion Archivo por Ventas </h2>
+                </header>
+                <div>
+                    <div class="jarviswidget-editbox">
+
+                        <input class="form-control" type="text">
+                    </div>
+                    <div class="row">
+                        <div class="modal-body">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <br />
+                                <div>
+                                    <div class="container-fluid">
+                                        <div class="form-horizontal">
+
+                                            <div class="form-group">
+                                                <div>
+                                                    <div>
+                                                        @Html.Label("ini", "Fecha Inicio:", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-3">
+                                                            @*<input type='text' class="form-control" id='inicio' />*@
+                                                            @Html.EditorFor(model => model.fechaInicial, new { htmlAttributes = new { @class = "form-control", @id = "inicio" } })
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        @Html.Label("fin", "Fecha Fin:", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        <div class="col-md-3">
+                                                            @Html.EditorFor(model => model.fechaFinal, new { htmlAttributes = new { @class = "form-control", @id = "fin" } })
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div>
+                                                        <button class="btn btn-info" type="submit" id="btnGenerar" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Descargando">
+                                                            <i class="fa fa-recycle"></i> Descargar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+@*SECCIÓN DE SCRIPTS**@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $("#btnGenerar").click(function () {
+            $("#btnGenerar").button('loading');
+        });
+
+         $(document).ready(function () {
+
+            if ($("#descarga").val() != '' && $("#descarga").val()!=null) {
+                alert($("#descarga").val());
+            }
+        });
+    </script>
+}
+
