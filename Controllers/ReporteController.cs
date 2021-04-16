@@ -52,7 +52,7 @@ namespace PrVeterinaria.Controllers
 
                 ViewBag.Producto = _db.Producto.Select(x => new SelectListItem { Value = x.id_producto.ToString(), Text = x.nombre + " - " + x.precio });
 
-                var detalle = _db.DetalleFactura.Select(m =>
+                var detalle = _db.DetalleFactura.Where(x => x.id_factura == id).Select(m =>
                   new VentaViewModel
                   {
                       id_producto = m.id_producto,
